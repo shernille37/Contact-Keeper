@@ -64,9 +64,9 @@ router.put('/:id', auth, async (req, res) => {
   // Build contact object
   const contactFields = {};
   if (name) contactFields.name = name;
-  if (email) contactFields.name = email;
-  if (phone) contactFields.name = phone;
-  if (type) contactFields.name = type;
+  if (email) contactFields.email = email;
+  if (phone) contactFields.phone = phone;
+  if (type) contactFields.type = type;
 
   try {
     // It returns an object
@@ -100,7 +100,7 @@ router.delete('/:id', auth, async (req, res) => {
     // It returns an object
     let contact = await Contact.findById(req.params.id);
 
-    if (!contacts) return res.status(404).json({ msg: 'Contact not found' });
+    if (!contact) return res.status(404).json({ msg: 'Contact not found' });
 
     // Make sure user owns contact
     if (contact.user.toString() !== req.user.id) {

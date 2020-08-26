@@ -9,7 +9,7 @@ const { check, validationResult } = require('express-validator/check');
 const User = require('../models/User');
 
 // @route   GET api/auth
-// @desc    Get logged in user
+// @desc    Get logged in user -- to know who logged in
 // @access  Private
 router.get('/', auth, async (req, res) => {
   try {
@@ -37,18 +37,21 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
+    // If no Errors
     const { email, password } = req.body;
 
     try {
       let user = await User.findOne({ email });
 
-      // If there's no user -- Invalid Credentials
+      // If there's no user with that email -- Invalid Credentials
       if (!user) {
         return res.status(400).json({ msg: 'Invalid Credentials' });
       }
 
+      // After Email --- Check Password if match
       const isMatch = await bcrypt.compare(password, user.password);
 
+      // If password does not match
       if (!isMatch) {
         return res.status(400).json({ msg: 'Invalid Credentials' });
       }

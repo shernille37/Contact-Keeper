@@ -11,6 +11,7 @@ module.exports = function (req, res, next) {
   }
 
   try {
+    // It returns an object with the user associated with the payload of the token generated
     const decoded = jwt.verify(token, config.get('jwtSecret'));
 
     req.user = decoded.user;

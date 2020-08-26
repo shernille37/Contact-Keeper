@@ -35,12 +35,14 @@ router.post(
 
     try {
       /* FIND IF THERE'S AN EXISTING EMAIL ON THE DATABASE */
+      // Return an Object
       let user = await User.findOne({ email });
 
       if (user) {
         return res.status(400).json({ msg: 'User already exists' });
       }
 
+      // If it is null -- Register
       user = new User({
         name: name,
         email: email,
@@ -51,8 +53,10 @@ router.post(
 
       user.password = await bcrypt.hash(password, salt);
 
+      // Registered User (Object) will get added to the Database
       await user.save();
 
+      // API will return a TOKEN with POST request
       const payload = {
         user: {
           id: user.id,
