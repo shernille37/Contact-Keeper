@@ -76,6 +76,18 @@ export default (state, action) => {
       };
     }
 
+    case LOGOUT: {
+      localStorage.removeItem('token');
+      return {
+        ...state,
+        token: null,
+        isAuthenticated: null,
+        loading: null,
+        user: null,
+        error: action.payload,
+      };
+    }
+
     case CLEAR_ERRORS: {
       return {
         ...state,
