@@ -1,4 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://Shernille:SKL3892809166@contactkeeper.vobbz.mongodb.net/Contacts?retryWrites=true&w=majority",
+  "mongoURI": "mongodb+srv://Shernille:<password>@contactkeeper.vobbz.mongodb.net/Contacts?retryWrites=true&w=majority",
   "jwtSecret": "secret"
 }

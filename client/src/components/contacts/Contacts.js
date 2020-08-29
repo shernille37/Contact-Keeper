@@ -14,7 +14,7 @@ const Contacts = () => {
     // eslint-disable-next-line
   }, []);
 
-  if (contacts.length === 0) {
+  if (contacts !== null && !loading && contacts.length === 0) {
     return <h4 className='text-center bg-light'>Please add a contact</h4>;
   }
 
